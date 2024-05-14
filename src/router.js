@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./routes/Root";
 import Home from "./components/Home";
+import VideoList from "./components/\bVideoList";
+import BookList from "./components/BookList";
 
 // 라우터 설계
 /*
@@ -24,9 +26,11 @@ const router = createBrowserRouter(
           element: <Home />,
         },
       ],
-      errorElement: <>
-        <h1>Opps!!!</h1>
-      </>
+      errorElement: (
+        <>
+          <h1>Opps!!!</h1>
+        </>
+      ),
     },
     {
       path: "/video",
@@ -36,7 +40,7 @@ const router = createBrowserRouter(
           path: "/video",
           element: (
             <>
-              <p>추천 영상 목록 페이지</p>
+              <VideoList />
             </>
           ),
         },
@@ -44,7 +48,7 @@ const router = createBrowserRouter(
           path: "/video/list",
           element: (
             <>
-              <p>추천 영상 목록 페이지</p>
+              <VideoList />
             </>
           ),
         },
@@ -52,7 +56,7 @@ const router = createBrowserRouter(
           path: "/video/search",
           element: (
             <>
-              <p>영상 검색 목록 페이지</p>
+              <VideoList />
             </>
           ),
         },
@@ -74,7 +78,7 @@ const router = createBrowserRouter(
           path: "/book/list",
           element: (
             <>
-              <p>추천 도서 목록 페이지</p>
+              <BookList />
             </>
           ),
         },
@@ -82,7 +86,7 @@ const router = createBrowserRouter(
           path: "/book/search",
           element: (
             <>
-              <p>도서 검색 목록 페이지</p>
+              <BookList />
             </>
           ),
         },
@@ -90,7 +94,7 @@ const router = createBrowserRouter(
           path: "/book/search/:isbn",
           element: (
             <>
-              <p>검색 도서 상세 페이지</p>
+              <BookList />
             </>
           ),
         },
