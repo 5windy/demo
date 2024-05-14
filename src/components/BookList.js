@@ -1,14 +1,16 @@
 import {
   Box,
   Button,
-  Card,
-  CardBody,
-  Divider,
   HStack,
   Input,
-  Image,
-  Text,
-  Stack,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
@@ -16,9 +18,9 @@ import { Link } from "react-router-dom";
 
 const VideoList = () => {
   // useState 는 화면 랜더링에 반영됨
-  const [videoList, setVideoList] = useState([]);
+  const [bookList, setBookList] = useState([]);
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState("달고나 커피");
+  const [search, setSearch] = useState("구름빵");
 
   // useRef 는 화면 랜더링 반영되지 않는 참조값
   const pageCount = useRef(1);
@@ -28,7 +30,7 @@ const VideoList = () => {
 
   const fetchBooks = async () => {
     const response = await fetch(
-      `https://dapi.kakao.com/v2/search/vclip?query=${search}&page=${page}&size=12`,
+      `https://dapi.kakao.com/v3/search/book?query=${search}&page=${page}&size=12`,
       {
         method: "GET",
         headers: {
@@ -47,7 +49,7 @@ const VideoList = () => {
     pageCount.current = pageCount.current > 15 ? 15 : pageCount.current;
     console.log(pageCount.current);
 
-    setVideoList(data.documents);
+    setBookList(data.documents);
   };
 
   const changeSearch = (e) => {
@@ -69,39 +71,38 @@ const VideoList = () => {
           variant="filled"
           w={"240px"}
         />
-        <HStack
-          wrap={"wrap"}
-          gap={"10px"}
-          m={"40px 0px"}
-        >
-          {videoList.map((video, index) => (
-            <Link to={video.url}>
-              <Card boxSize={"300px"} key={index}>
-                <CardBody>
-                  <Image
-                    w={"280px"}
-                    src={video.thumbnail}
-                    alt={video.title}
-                    borderRadius="lg"
-                  />
-                  <Stack mt="6" spacing="3">
-                    <Text
-                      fontWeight={"bold"}
-                      textOverflow={"ellipsis"}
-                      overflow={"hidden"}
-                      lineHeight={"1em"}
-                      height={"2em"}
-                    >
-                      {video.title}
-                    </Text>
-                    <Divider />
-                    <Text>{video.author}</Text>
-                  </Stack>
-                </CardBody>
-              </Card>
-            </Link>
-          ))}
-        </HStack>
+        <TableContainer m={"40px 0"}>
+          <Table variant={"striped"} colorScheme="blackAlpha">
+            <Thead>
+              <Tr>
+                <Th>No</Th>
+                <Th>Title</Th>
+                <Th>Author</Th>
+                <Th>Publisher</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {bookList.map((book, index) => (
+                <>
+                  <Tr
+                    _hover={{
+                      backgroundColor: "lightblue",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <Td>{(page - 1) * 10 + index + 1}</Td>
+                    <Td>
+                      <Link to={`/book/search/${book.isbn}`}>{book.title}</Link>
+                    </Td>
+                    <Td>{book.authors[0]}</Td>
+                    <Td>{book.publisher}</Td>
+                  </Tr>
+                </>
+              ))}
+            </Tbody>
+            <Tfoot></Tfoot>
+          </Table>
+        </TableContainer>
         <HStack mb={"40px"} justifyContent={"center"}>
           {Array.from({ length: pageCount.current }, (_, index) => (
             <>
