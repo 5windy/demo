@@ -3,17 +3,18 @@ import Root from "./routes/Root";
 import Home from "./components/Home";
 import VideoList from "./components/\bVideoList";
 import BookList from "./components/BookList";
+import BookDetail from "./components/BookDetail";
 
 // 라우터 설계
 /*
-GET     /demo/video                 추천 영상 목록 페이지 
-GET     /demo/video/list            추천 영상 목록 페이지 
-GET     /demo/video/search          검색 영상 목록 페이지
+GET     /demo/video                 추천 영상 목록 페이지     <VideoList />
+GET     /demo/video/list            추천 영상 목록 페이지     <VideoList /> 
+GET     /demo/video/search          검색 영상 목록 페이지     <VideoList />
 
-GET     /demo/book                  추천 도서 목록 페이지 
-GET     /demo/book/list             추천 도서 목록 페이지 
-GET     /demo/book/search           검색 도서 목록 페이지 
-GET     /demo/book/search/{:isbn}   검색 도서 상세 페이지 
+GET     /demo/book                  추천 도서 목록 페이지     <BookList />
+GET     /demo/book/list             추천 도서 목록 페이지     <BookList /> 
+GET     /demo/book/search           검색 도서 목록 페이지     <BookList /> 
+GET     /demo/book/search/:isbn     검색 도서 상세 페이지     <BookDetail /> 
 */
 const router = createBrowserRouter(
   [
@@ -94,7 +95,7 @@ const router = createBrowserRouter(
           path: "/book/search/:isbn",
           element: (
             <>
-              <BookList />
+              <BookDetail />
             </>
           ),
         },
