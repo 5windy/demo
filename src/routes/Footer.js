@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div>
-            footer
-        </div>
+        <footer>
+            <address>서울시 서초구</address>
+        </footer>
     );
 };
 
