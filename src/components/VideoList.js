@@ -23,7 +23,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { MdOndemandVideo } from "react-icons/md";
 import { AiFillSun, AiFillMoon } from "react-icons/ai";
 
-const BookList = () => {
+const VideoList = () => {
   // useState 는 화면 랜더링에 반영됨
   const [bookList, setBookList] = useState([]);
   const [page, setPage] = useState(1);
@@ -141,4 +141,4 @@ const BookList = () => {
   );
 };
 
-export default BookList;
+export default VideoList;
