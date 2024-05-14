@@ -12,6 +12,7 @@ import {
   MenuItem,
   MenuList,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -20,12 +21,16 @@ import { AiFillSun, AiFillMoon } from "react-icons/ai";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const color = useColorModeValue("red.500", "white");
 
   return (
     <>
       <header>
-        <Heading textAlign={"center"} size={"2xl"} mb={"20px"}>
-          <Icon as={FaSearch} /> 검색 서비스
+        <Heading textAlign={"center"} size={"xl"} m={"20px"} color={color}>
+          <Link to={"/"}>
+            <Icon as={FaSearch} />
+            검색 서비스
+          </Link>
         </Heading>
         <HStack justifyContent={"space-between"}>
           <HStack>
