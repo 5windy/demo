@@ -69,14 +69,10 @@ const VideoList = () => {
           variant="filled"
           w={"240px"}
         />
-        <HStack
-          wrap={"wrap"}
-          gap={"10px"}
-          m={"40px 0px"}
-        >
+        <HStack wrap={"wrap"} gap={"10px"} m={"40px 0px"}>
           {videoList.map((video, index) => (
-            <Link to={video.url}>
-              <Card boxSize={"300px"} key={index}>
+            <Link to={video.url} key={video.url}>
+              <Card boxSize={"300px"}>
                 <CardBody>
                   <Image
                     w={"280px"}
