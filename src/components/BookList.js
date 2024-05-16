@@ -7,6 +7,7 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Text,
   Tfoot,
   Th,
   Thead,
@@ -39,7 +40,7 @@ const BookList = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     pageCount.current =
       data.meta.pageable_count % 10 > 0
@@ -47,7 +48,7 @@ const BookList = () => {
         : data.meta.pageable_count / 10;
     pageCount.current = Math.floor(pageCount.current);
     pageCount.current = pageCount.current > 15 ? 15 : pageCount.current;
-    console.log(pageCount.current);
+    // console.log(pageCount.current);
 
     setBookList(data.documents);
   };
@@ -71,14 +72,20 @@ const BookList = () => {
           variant="filled"
           w={"240px"}
         />
-        <TableContainer m={"40px 0"}>
-          <Table variant={"striped"} colorScheme="blackAlpha">
+        <TableContainer>
+          <Table variant={"striped"} colorScheme="blackAlpha" m={"40px 0"}>
             <Thead>
               <Tr>
                 <Th>No</Th>
                 <Th>Title</Th>
-                <Th>Author</Th>
-                <Th>Publisher</Th>
+                {window.screen.width >= 760 ? (
+                  <>
+                    <Th>Author</Th>
+                    <Th>Publisher</Th>
+                  </>
+                ) : (
+                  <></>
+                )}
               </Tr>
             </Thead>
             <Tbody>
@@ -92,10 +99,26 @@ const BookList = () => {
                   >
                     <Td>{(page - 1) * 10 + index + 1}</Td>
                     <Td>
-                      <Link to={`/book/search/${book.isbn}`}>{book.title}</Link>
+                      <Link to={`/book/search/${book.isbn}`}>
+                        <Text
+                          isTruncated
+                          maxWidth="50vw"
+                          whiteSpace="nowrap"
+                          overflow="hidden"
+                          textOverflow="ellipsis"
+                        >
+                          {book.title}
+                        </Text>
+                      </Link>
                     </Td>
-                    <Td>{book.authors[0]}</Td>
-                    <Td>{book.publisher}</Td>
+                    {window.screen.width >= 760 ? (
+                      <>
+                        <Td>{book.authors[0]}</Td>
+                        <Td>{book.publisher}</Td>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </Tr>
                 </>
               ))}
@@ -103,7 +126,7 @@ const BookList = () => {
             <Tfoot></Tfoot>
           </Table>
         </TableContainer>
-        <HStack mb={"40px"} justifyContent={"center"}>
+        <HStack mb={"40px"} justifyContent={"center"} wrap={"wrap"}>
           {Array.from({ length: pageCount.current }, (_, index) => (
             <>
               <Button

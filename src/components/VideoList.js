@@ -37,7 +37,7 @@ const VideoList = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     pageCount.current =
       data.meta.pageable_count % 10 > 0
@@ -45,7 +45,7 @@ const VideoList = () => {
         : data.meta.pageable_count / 10;
     pageCount.current = Math.floor(pageCount.current);
     pageCount.current = pageCount.current > 15 ? 15 : pageCount.current;
-    console.log(pageCount.current);
+    // console.log(pageCount.current);
 
     setVideoList(data.documents);
   };
@@ -98,7 +98,7 @@ const VideoList = () => {
             </Link>
           ))}
         </HStack>
-        <HStack mb={"40px"} justifyContent={"center"}>
+        <HStack mb={"40px"} justifyContent={"center"} wrap={"wrap"}>
           {Array.from({ length: pageCount.current }, (_, index) => (
             <>
               <Button

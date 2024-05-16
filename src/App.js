@@ -7,7 +7,7 @@ import { Grid } from "@chakra-ui/react";
 
 function App() {
   return (
-    <Grid p={"40px 20px"} gap={"10px"} minH={"100vh"} templateRows={"140px auto 160px"}>
+    <Grid p={"40px 20px"} gap={"10px"} minH={"100vh"} templateRows={"140px auto 160px"} w={"90vw"} margin={"auto"}>
       <RouterProvider router={router} />
     </Grid>
   );
